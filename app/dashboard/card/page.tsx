@@ -10,6 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 const notifications = [
   {
@@ -30,8 +32,9 @@ type CardProps = React.ComponentProps<typeof Card>;
 
 export default function Page({ className, ...props }: CardProps) {
   return (
-    <div className="grid grid-cols-5 gap-3">
-      <Card className={cn("w-[380px]", className)} {...props}>
+    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+      {"123456789".split("").map((item, index)=>(
+        <Card key={index}>
         <CardHeader>
           <CardTitle>Notifications</CardTitle>
           <CardDescription>You have 3 unread messages.</CardDescription>
@@ -62,6 +65,28 @@ export default function Page({ className, ...props }: CardProps) {
           </Button>
         </CardFooter>
       </Card>
+      ))}
+     
+     <Card className="col-span-1  sm:col-span-3">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" placeholder="Name of your project" />
+            </div>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
     </div>
   );
 }
